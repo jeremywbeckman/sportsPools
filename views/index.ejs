@@ -1,7 +1,12 @@
 <html>
    <head>
+      <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"/>
+      <link href="/css/proj.css" rel="stylesheet"/>
+      <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+      <script src="/js/ngApp.js"></script>
    </head>
-   <body>
-      <h1>Hello World</h1>
+   <body ng-app="app" ng-controller="ProjCtrl">
+      <h1>Hello {{ aVal }}</h1>
    </body>
 </html>
