@@ -1,0 +1,23 @@
+{
+  "name": "newproj",
+  "version": "1.0.0",
+  "description": "project setup",
+  "main": "server.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeremywbeckman/newProj.git"
+  },
+  "author": "Jeremy Beckman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeremywbeckman/newProj/issues"
+  },
+  "homepage": "https://github.com/jeremywbeckman/newProj#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3"
+  }
+}
