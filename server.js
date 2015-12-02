@@ -12,10 +12,7 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/public')));
-
-app.get('/', function(req, res) {
-   res.render('index.ejs');
-});
+app.use(require('./routes'));
 
 app.listen(process.env.PORT || 3000);
 module.exports = app;
