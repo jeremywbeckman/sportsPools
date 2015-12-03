@@ -8,6 +8,6 @@ gulp.task('css', function() {
        .pipe(gulp.dest('public/css/'));
 });
 
-gulp.task('watch:css', function() {
+gulp.task('watch:css', ['css'], function() {
    gulp.watch('views/**/*.styl', ['css']);
 });
