@@ -21,13 +21,16 @@
     "body-parser": "^1.14.1",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
-    "mongoose": "^4.2.8",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-ng-annotate": "^1.1.0",
     "gulp-nodemon": "^2.0.4",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-stylus": "^2.1.0",
-    "gulp-uglify": "^1.5.1"
+    "gulp-uglify": "^1.5.1",
+    "lodash": "^3.10.1",
+    "mongoose": "^4.2.8",
+    "morgan": "^1.6.1",
+    "ws": "^0.8.1"
   }
 }
