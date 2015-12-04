@@ -1,22 +1,21 @@
 {
-  "name": "newproj",
+  "name": "sportsPools",
   "version": "1.0.0",
-  "description": "project setup",
+  "description": "Fake betting sports leagues",
   "main": "server.js",
   "scripts": {
-    "test": "gulp test",
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jeremywbeckman/newProj.git"
+    "url": "git+https://github.com/jeremywbeckman/sportsPools.git"
   },
   "author": "Jeremy Beckman",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jeremywbeckman/newProj/issues"
+    "url": "https://github.com/jeremywbeckman/sportsPools/issues"
   },
-  "homepage": "https://github.com/jeremywbeckman/newProj#readme",
+  "homepage": "https://github.com/jeremywbeckman/sportsPools#readme",
   "dependencies": {
     "body-parser": "^1.14.1",
     "ejs": "^2.3.4",
@@ -32,5 +31,8 @@
     "mongoose": "^4.2.8",
     "morgan": "^1.6.1",
     "ws": "^0.8.1"
+  },
+  "devDependencies": {
+    "gulp-livereload": "^3.8.1"
   }
 }

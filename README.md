@@ -2,6 +2,6 @@
    <head>
    </head>
    <body>
-   <h1>My project setup</h1>
+   <h2>Sports Fake Betting Leagues Web Application</h2>
    </body>
 </html>
