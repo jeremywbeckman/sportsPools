@@ -4,9 +4,24 @@ angular.module('app')
    '$stateProvider',
    '$urlRouterProvider',
    function($stateProvider, $urlRouterProvider) {
-      $stateProvider.state('/someUrl', {
-         url: '/someUrl',
-         templateUrl: '/someUrl.html',
-         controller: 'UrlCtrl'
+
+      $stateProvider.state('home', {
+         url: '/home',
+         templateUrl: '/home.html',
+         controller: 'HomeCtrl'
       });
+
+      $stateProvider.state('login', {
+         url: '/login',
+         templateUrl: '/login.html',
+         controller: 'AuthCtrl'
+      });
+
+      $stateProvider.state('register', {
+         url: '/register',
+         templateUrl: '/register.html',
+         controller: 'AuthCtrl'
+      });
+
+      $urlRouterProvider.otherwise('home');
 }]);

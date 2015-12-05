@@ -6,13 +6,13 @@
       <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
       <script src="/js/ngApp.js"></script>
    </head>
-   <body ng-app="app" ng-controller="ProjCtrl">
-      <h1>Hello {{ aVal }}</h1>
-      <form ng-submit="getData()">
-         <button type="submit">Get Data</button>
-      </form>
-      <form ng-submit="getWSData()">
-         <button type="submit">Get Websocket Data</button>
-      </form>
+   <body ng-app="app">
+      <%- partial('main/navbar') %>
+      <div class="col-md-9 col-md-offset-1">
+         <ui-view></ui-view>
+      </div>
+      <%- partial('authorization/login') %>
+      <%- partial('authorization/register') %>
+      <%- partial('main/home') %>
    </body>
 </html>
