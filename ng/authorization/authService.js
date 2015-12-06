@@ -39,6 +39,11 @@ angular.module('app')
          });
       };
 
+      auth.changePassword = function(user) {
+         user.username = auth.currentUser().username;
+         return $http.post('/changePassword', user);
+      };
+
       auth.login = function(user) {
          return $http.post('/login', user)
                      .success(function(data) {

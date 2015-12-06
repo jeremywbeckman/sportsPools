@@ -18,7 +18,6 @@ module.exports = function(app) {
          
          if (user !== null) {
             if (user.validPassword(req.body.password)) {
-               console.log('Updating last login');
                user.updateLastLogin();
                return res.json({ token : user.generateJWT() });
             }

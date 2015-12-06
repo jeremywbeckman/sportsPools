@@ -6,6 +6,8 @@ angular.module('app')
    '$state',
    'auth',
    function($scope, $state, auth) {
+      $scope.currentUser = auth.currentUser;
+
       $scope.login = function() {
          auth.login($scope.user)
              .error(function(error) { $scope.error = error; })
@@ -15,11 +17,19 @@ angular.module('app')
       $scope.registerUser = function() {
          auth.register($scope.user)
              .error(function(data) {
-               console.log('Error occurred: ' + data.message);
-               $scope.error = data;
-               console.log($scope.error.message);
+                $scope.error = data;
              })
              .then(function() { console.log('Going home'); $state.go('home'); });
+      };
+
+      $scope.changePassword = function() {
+         auth.changePassword($scope.user)
+             .error(function(data) {
+                $scope.error = data;
+              })
+             .then(function() {
+                $scope.info = { message: 'Password change successful' };
+             });
       };
 
       $scope.validateForm = function() {
@@ -27,7 +37,11 @@ angular.module('app')
                 $scope.validatePassword() && 
                 $scope.validateVerify();
       };
-      
+
+      $scope.validatePasswordForm = function() {
+         return $scope.validatePassword() && $scope.validateVerify();
+      };
+
       $scope.validateUsername = function() {
          if (/\s/g.test($scope.user.username)) {
             $scope.usernameMessage = "Username cannot contain whitespace";

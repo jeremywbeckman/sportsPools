@@ -2,4 +2,54 @@
    <div class=page-header">
       <h1>Account Details</h1>
    </div>
+   <div ng-show="error.message" class="alert alert-danger row">
+      <span>{{ error.message }}</span>
+   </div>
+   <div ng-show="info.message" class="info row">
+      <span>{{ error.message }}</span>
+   </div>
+   <div>First Name: {{ currentUser().firstname }}</div>
+   <div>Last Name: {{ currentUser().lastname }}</div>
+   <div>Username: {{ currentUser().username }}</div>
+   <div>Email Address: {{ currentUser().email }}</div>
+   <div>Last Login: {{ currentUser().lastlogin }}</div>
+   <form style="margin-top:20px;" name="passwordChangeForm" ng-submit="changePassword()" novalidate>
+      <div class="form-group">
+         <input type="password"
+                class="form-control"
+                name="password"
+                ng-minlength="8"
+                ng-maxlength="30"
+                maxlength="40"
+                placeholder="Password"
+                required
+                ng-change="validatePassword()"
+                ng-model="user.password"/>
+      </div>
+      <p ng-show="passwordMessage" class="help-block">{{ passwordMessage }}</p>
+      <p ng-show="registrationForm.password.$error.minlength &&
+                  !registrationForm.password.$pristine"
+         class="help-block">
+         Password must be at least 8 characters
+      </p>
+      <p ng-show="registrationForm.password.$error.maxlength &&
+                  !registrationForm.password.$pristine"
+         class="help-block">
+         Password can be no more than 30 characters
+      </p>
+      <div class="form-group">
+         <input type="password"
+                class="form-control"
+                name="verify"
+                maxlength="40"
+                placeholder="Verify Password"
+                required
+                ng-change="validateVerify()"
+                ng-model="user.verify"/>
+      </div>
+      <p ng-show="verifyMessage" class="help-block">{{ verifyMessage }}</p>
+      <button type="submit"
+              class="btn btn-primary"
+              ng-disabled="passwordChangeForm.$invalid || !validatePasswordForm()">Change Password</button>
+   </form>
 </script>

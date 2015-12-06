@@ -33,12 +33,12 @@ UserSchema.methods.generateJWT = function() {
    exp.setDate(new Date().getDate() + 7);
 
    return jwt.sign({
-      username: this._id,
+      username: this.username,
       firstname: this.firstname,
       lastname: this.lastname,
       email: this.email,
       role: this.role,
-      lastlogin: this.lastLogin,
+      lastlogin: this.lastlogin,
       exp: parseInt(exp.getTime() / 1000, 10)
    }, process.env.SECKEY);
 };
@@ -52,11 +52,35 @@ UserSchema.methods.updateLastLogin = function() {
    });
 };
 
+UserSchema.methods.persistPassword = function() {
+   this.model('User').findOneAndUpdate({ "username" : this.username }, 
+                                       { "hash" : this.hash, "salt" : this.salt },
+                                       function(err, user) {
+      if (err) { console.log('database error occurred, password not updated'); }
+      
+      console.log(user.username + ' password has been updated');
+   });
+};
+
 UserSchema.statics.findByUsername = function(username, cbFunc) {
    this.findOne({ "username" : username }, function(err, user) {
       if (err) { return cbFunc(err); }
 
       return cbFunc(user);
+   });
+};
+
+UserSchema.statics.updatePassword = function(username, password, cbFunc) {
+   this.findOne({ "username" : username }, function(err, user) {
+      if (err) { return cbFunc(err); }
+
+      if (user !== null) {
+         user.setPassword(password);
+         user.persistPassword();
+         return user;
+      }
+      
+      return null;
    });
 };
 
