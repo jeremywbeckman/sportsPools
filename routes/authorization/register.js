@@ -77,6 +77,7 @@ module.exports = function(app) {
          user.firstname = req.body.firstname;
          user.lastname = req.body.lastname;
          user.role = "siteUser";
+         user.reviewed = false;
          user.lastlogin = new Date();
 
          user.save(function(err) {
