@@ -37,9 +37,11 @@ module.exports = function(app) {
             return res.status(400).json({ message: 'Database Persistence Error' });
          }
          
+         console.log('returning from here');
          if (data === null) {
             return res.status(400).json({ message: 'User not found, no update performed' });
          }
+         
          return res.status(200).json({ message: 'Password Update Successful'});
       });
    });

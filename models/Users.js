@@ -77,10 +77,10 @@ UserSchema.statics.updatePassword = function(username, password, cbFunc) {
       if (user !== null) {
          user.setPassword(password);
          user.persistPassword();
-         return user;
+         return cbFunc(user);
       }
       
-      return null;
+      return cbFunc(null);
    });
 };
 

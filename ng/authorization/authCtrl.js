@@ -19,7 +19,7 @@ angular.module('app')
              .error(function(data) {
                 $scope.error = data;
              })
-             .then(function() { console.log('Going home'); $state.go('home'); });
+             .then(function() { $state.go('home'); });
       };
 
       $scope.changePassword = function() {
@@ -28,7 +28,9 @@ angular.module('app')
                 $scope.error = data;
               })
              .then(function() {
-                $scope.info = { message: 'Password change successful' };
+                $scope.user.password = '';
+                $scope.user.verify = '';
+                $scope.info = { message : 'Password Change Successful' };
              });
       };
 
