@@ -44,4 +44,12 @@ UserSchema.methods.generateJWT = function() {
    }, process.env.SECKEY);
 };
 
+UserSchema.statics.findByUsername = function(username, cbFunc) {
+   this.findOne({ "username" : username }, function(err, user) {
+      if (err) { return cbFunc(err); }
+
+      return cbFunc(user);
+   });
+};
+
 mongoose.model('User', UserSchema);

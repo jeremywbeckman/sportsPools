@@ -60,24 +60,30 @@ module.exports = function(app) {
       if (req.body.password !== req.body.verify) {
          return res.status(400).json({ message: 'Passwords do not match' });
       }
-      
-      if (User.findOne({ "username" : req.body.username})) {
-         return res.status(400).json({ message: 'Username already taken' });
-      }
-      
-      var user = new User();
-      user.username = req.body.username;
-      user.setPassword(req.body.password);
-      user.email = req.body.email;
-      user.firstname = req.body.firstname;
-      user.lastname = req.body.lastname;
-      user.role = "siteUser";
-      user.lastlogin = new Date();
-      
-      user.save(function(err) {
-         if (err) { return next(err); }
-         
-         return res.json({ token: user.generateJWT()});
+
+      User.findByUsername(req.body.username, function(doc) {
+         if (doc instanceof Error) {
+            return res.status(400).json({ message: 'Database Persistence Error' });
+         }
+         if (doc !== null) {
+            console.log("Previous user found");
+            return res.status(400).json({ message: 'Username already taken' });
+         }
+
+         var user = new User();
+         user.username = req.body.username;
+         user.setPassword(req.body.password);
+         user.email = req.body.email;
+         user.firstname = req.body.firstname;
+         user.lastname = req.body.lastname;
+         user.role = "siteUser";
+         user.lastlogin = new Date();
+
+         user.save(function(err) {
+            if (err) { return next(err); }
+
+            return res.json({ token: user.generateJWT()});
+         });
       });
    });
 };
