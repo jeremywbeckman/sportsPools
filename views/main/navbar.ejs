@@ -1,9 +1,9 @@
 <nav class="nav navbar-default pull-right">
    <ul class="nav navbar-nav" ng-controller="NavCtrl">
-      <li ng-show="isLoggedIn()">Welcome <a href="/#/accountDetails">{{ currentUser.firstname }} {{ currentUser.lastname }}</a></li>
-      <li ng-show="isLoggedIn()">Home</li>
+      <li ng-show="isLoggedIn()"><a href="/#/accountDetails">{{ currentUser().firstname }} {{ currentUser().lastname }}</a></li>
+      <li ng-show="isLoggedIn()"><a href="/#/home">Home</a></li>
       <li ng-hide="isLoggedIn()"><a href="/#/login">Login</a></li>
-      <li ng-show="isLoggedIn()" ng-click="logout()">Logout</li>
+      <li ng-show="isLoggedIn()" ng-click="logout()"><a>Logout</a></li>
       <li ng-hide="isLoggedIn()"><a href="/#/register">Create Account</a></li>
    </ul>
 </nav>

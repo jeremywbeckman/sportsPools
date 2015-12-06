@@ -22,6 +22,12 @@ angular.module('app')
          templateUrl: '/register.html',
          controller: 'AuthCtrl'
       });
+      
+      $stateProvider.state('accountDetails', {
+         url: '/accountDetails',
+         templateUrl: '/accountDetails.html',
+         controller: 'AuthCtrl'
+      });
 
       $urlRouterProvider.otherwise('home');
 }]);

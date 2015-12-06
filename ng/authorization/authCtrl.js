@@ -7,7 +7,6 @@ angular.module('app')
    'auth',
    function($scope, $state, auth) {
       $scope.login = function() {
-         console.log('Attempting login');
          auth.login($scope.user)
              .error(function(error) { $scope.error = error; })
              .then(function() { $state.go('home'); });
