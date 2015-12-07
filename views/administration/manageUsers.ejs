@@ -1,0 +1,19 @@
+<script type="text/ng-template" id="/manageUsers.html">
+   <div class="page-header">
+      <h1>User Management</h1>
+   </div>
+   <div ng-show="error.message" class="alert alert-danger row">
+      <span>{{ error.message }}</span>
+   </div>
+   <div>
+      <h3>Review Usernames ({{reviewUsers.length}})</h3>
+   </div>
+   <form style="margin-top:20px;" name="UserReviewForm" ng-submit="approveUser()">
+      <div class="form-group row">
+         <input type="text"
+                class="form-control col-md-10"
+                ng-model="goodname"/>
+         <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+   </form>
+</script>

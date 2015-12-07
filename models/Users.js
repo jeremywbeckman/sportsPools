@@ -64,23 +64,47 @@ UserSchema.methods.persistPassword = function() {
 
 UserSchema.statics.findByUsername = function(username, cbFunc) {
    this.findOne({ "username" : username }, function(err, user) {
-      if (err) { return cbFunc(err); }
+      if (err) { cbFunc(err); }
 
-      return cbFunc(user);
+      cbFunc(user);
    });
 };
 
 UserSchema.statics.updatePassword = function(username, password, cbFunc) {
    this.findOne({ "username" : username }, function(err, user) {
-      if (err) { return cbFunc(err); }
+      if (err) { cbFunc(err); }
 
       if (user !== null) {
          user.setPassword(password);
          user.persistPassword();
-         return cbFunc(user);
+         cbFunc(user);
       }
+
+      cbFunc(null);
+   });
+};
+
+UserSchema.statics.findReviewableUsers = function(cbFunc) {
+   this.find({ "reviewed" : false }, 'username', function(err, users) {
+      if (err) { cbFunc(err); }
+
+      cbFunc(users);
+   });
+};
+
+UserSchema.statics.reviewComplete = function(username, cbFunc) {
+   this.findOneAndUpdate({ "username" : username }, { "reviewed" : true }, function(err, user) {
+      if (err) { cbFunc(err); }
       
-      return cbFunc(null);
+      cbFunc(user);
+   });
+};
+
+UserSchema.statics.updateUsername = function(badname, goodname, cbFunc) {
+   this.findOneAndUpdate({ "username" : badname }, { "username" : goodname, "reviewed" : true }, function(err, user) {
+      if (err) { cbFunc(err); }
+      
+      cbFunc(user);
    });
 };
 

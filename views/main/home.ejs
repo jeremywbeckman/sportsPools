@@ -3,7 +3,7 @@
       <h1>Fantasy Sports Leagues</h1>
    </div>
    <ul ng-show="isLoggedIn()" class="list-inline">
-      <li ng-show="currentUser().role === 'siteAdmin'"><a href="/#/updateGames">Update Games</a></li>
+      <li ng-show="currentUser().role === 'siteAdmin'"><a href="/#/manageGames">Update Games</a></li>
       <li ng-show="currentUser().role === 'siteAdmin'"><a href="/#/manageUsers">Manage Users</a></li>
       <li ng-show="currentUser().role === 'siteAdmin'"><a href="/#/manageLeagues">Manage Leagues</a></li>
       <li><a href="/#/createLeague">Create Private League</a></li>

@@ -41,7 +41,10 @@ angular.module('app')
 
       auth.changePassword = function(user) {
          user.username = auth.currentUser().username;
-         return $http.post('/changePassword', user);
+         return $http.post('/changePassword', user)
+                     .success(function(data) {
+            console.log('Password change worked');
+         });
       };
 
       auth.login = function(user) {
