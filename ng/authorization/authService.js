@@ -33,25 +33,16 @@ angular.module('app')
       };
 
       auth.register = function(user) {
-         return $http.post('/registerUser', user)
-                     .success(function(data) {
-            auth.saveToken(data.token);
-         });
+         return $http.post('/registerUser', user);
       };
 
       auth.changePassword = function(user) {
          user.username = auth.currentUser().username;
-         return $http.post('/changePassword', user)
-                     .success(function(data) {
-            console.log('Password change worked');
-         });
+         return $http.post('/changePassword', user);
       };
 
       auth.login = function(user) {
-         return $http.post('/login', user)
-                     .success(function(data) {
-            auth.saveToken(data.token);
-         });
+         return $http.post('/login', user);
       };
 
       auth.logout = function() {

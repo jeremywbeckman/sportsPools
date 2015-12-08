@@ -10,8 +10,8 @@ angular.module('app')
 
       $scope.login = function() {
          auth.login($scope.user)
-             .error(function(error) { $scope.error = error; })
-             .then(function() { $state.go('home'); });
+             .then(function(data) {  $state.go('home'); },
+                   function(error) { $scope.error = error.data; });
       };
 
       $scope.registerUser = function() {
@@ -86,7 +86,7 @@ angular.module('app')
       };
 
       $scope.validateVerify = function() {
-         if ($scope.user.password !== $scope.user.verify) {
+         if ($scope.user.password && $scope.user.password !== $scope.user.verify) {
             $scope.verifyMessage = "Passwords don't match";
             return false;
          }

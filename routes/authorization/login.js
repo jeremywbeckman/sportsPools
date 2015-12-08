@@ -4,6 +4,7 @@ var User = require('mongoose').model('User');
 
 module.exports = function(app) {
    app.post('/login', function(req, res, next) {
+      console.log('Login attempt');
       if (!req.body.username) {
          return res.status(400).json({ message: 'Missing Username' });
       }
@@ -11,9 +12,10 @@ module.exports = function(app) {
          return res.status(400).json({ message: 'Missing password' });
       }
 
+      console.log('Finding user');
       User.findByUsername(req.body.username, function(user) {
          if (user instanceof Error) {
-            return res.status(400).json({ message: 'Site Database Error' });
+            return res.status(500).json({ message: 'Site Database Error' });
          }
          
          if (user !== null) {

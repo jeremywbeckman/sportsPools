@@ -12,7 +12,7 @@
    <div>Last Name: {{ currentUser().lastname }}</div>
    <div>Username: {{ currentUser().username }}</div>
    <div>Email Address: {{ currentUser().email }}</div>
-   <div>Last Login: {{ currentUser().lastlogin }}</div>
+   <div>Last Login: {{ currentUser().lastlogin | date: 'MM-dd-yyyy HH:mm' }}</div>
    <form style="margin-top:20px;" name="passwordChangeForm" ng-submit="changePassword()" novalidate>
       <div class="form-group">
          <input type="password"
@@ -27,13 +27,13 @@
                 ng-model="user.password"/>
       </div>
       <p ng-show="passwordMessage" class="help-block">{{ passwordMessage }}</p>
-      <p ng-show="registrationForm.password.$error.minlength &&
-                  !registrationForm.password.$pristine"
+      <p ng-show="passwordChangeForm.password.$error.minlength &&
+                  !passwordChangeForm.password.$pristine"
          class="help-block">
          Password must be at least 8 characters
       </p>
-      <p ng-show="registrationForm.password.$error.maxlength &&
-                  !registrationForm.password.$pristine"
+      <p ng-show="passwordChangeForm.password.$error.maxlength &&
+                  !passwordChangeForm.password.$pristine"
          class="help-block">
          Password can be no more than 30 characters
       </p>
