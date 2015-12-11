@@ -65,6 +65,7 @@ angular.module('app')
                $scope.teams.sort();
                $scope.gameData.awayTeam = $scope.teams[0];
                $scope.gameData.homeTeam = $scope.teams[$scope.teams.length-1];
+               $scope.resetForm();
             },
             function(error) {
                $scope.error = error.data;
@@ -73,7 +74,6 @@ angular.module('app')
       };
 
       $scope.resetForm = function() {
-         $scope.sportSelected();
          gameData.getGamesForDate($scope.gameData.sport, $scope.gameData.date).then(
             function(games) {
                $scope.existingGames = games.data;
@@ -94,6 +94,7 @@ angular.module('app')
          $scope.gameData.underOdds = '';
       };
 
+      $scope.sportSelected();
       $scope.resetForm();
    }
 ]);
