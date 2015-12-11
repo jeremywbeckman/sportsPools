@@ -47,5 +47,29 @@ angular.module('app')
          controller: 'LeagueMgmtCtrl'
       });
 
+      $stateProvider.state('createLeague', {
+         url: '/createLeague',
+         templateUrl: '/createLeague.html',
+         controller: 'LeagueCreateCtrl'
+      });
+
+      $stateProvider.state('registerLeague', {
+         url: '/registerLeague',
+         templateUrl: '/registerLeague.html',
+         controller: 'RegisterLeagueCtrl'
+      });
+
+      $stateProvider.state('viewLeague', {
+         url: '/viewLeague/:leagueName',
+         templateUrl: '/viewLeague.html',
+         controller: 'ViewLeagueCtrl'
+      });
+
+      $stateProvider.state('userStats', {
+         url: '/userStats',
+         templateUrl: '/userStats.html',
+         controller: 'UserStatCtrl'
+      });
+
       $urlRouterProvider.otherwise('home');
 }]);
