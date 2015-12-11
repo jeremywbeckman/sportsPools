@@ -1,5 +1,4 @@
 /*global angular*/
-/*global console*/
 angular.module('app')
 .factory('auth', [
    '$http',

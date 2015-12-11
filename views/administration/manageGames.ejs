@@ -2,4 +2,87 @@
    <div class="page-header">
       <h1>Game Management</h1>
    </div>
+   <div ng-show="error.message" class="alert alert-danger row">
+      <span>{{ error.message }}</span>
+   </div>
+   <div ng-show="info.message" class="alert alert-success row">
+      <span>{{ info.message }}</span>
+   </div>
+   <form ng-submit="saveGame()" name="saveGameForm">
+      <div class="form-group">
+         <select name="sportSelect"
+                 class="form-control"
+                 id="sportSelect"
+                 ng-options="sport for sport in sports"
+                 ng-change="sportSelected()"
+                 ng-model="gameData.sport"/>
+         <input type="date"
+                class="form-control"
+                id="dateSelect"
+                ng-change="resetForm()"
+                ng-model="gameData.date"/>
+         <select name="awayTeamSelect"
+                 class="form-control"
+                 id="awayTeamSelect"
+                 ng-options="team for team in teams"
+                 ng-model="gameData.awayTeam"/>
+         <input type="number"
+                class="form-control"
+                ng-model="gameData.awayScore"
+                placeholder="Away Score"/>
+         <select name="homeTeamSelect"
+                 class="form-control"
+                 id="homeTeamSelect"
+                 ng-options="team for team in teams"
+                 ng-model="gameData.homeTeam"/>
+         <input type="number"
+                class="form-control"
+                ng-model="gameData.homeScore"
+                placeholder="Home Score"/>
+         <input type="number"
+                class="form-control"
+                step="any"
+                ng-model="gameData.gameLine"
+                placeholder="Betting Line"/>
+         <input type="number"
+                class="form-control"
+                ng-model="gameData.awayLineOdds"
+                placeholder="Away Line Odds"/>
+         <input type="number"
+                class="form-control"
+                ng-model="gameData.homeLineOdds"
+                placeholder="Home Line Odds"/>
+         <input type="number"
+                class="form-control"
+                ng-model="gameData.awayMoneyLine"
+                placeholder="Away Money Line"/>
+         <input type="number"
+                class="form-control"
+                ng-model="gameData.homeMoneyLine"
+                placeholder="Home Money Line"/>
+         <input type="number"
+                class="form-control"
+                step="any"
+                ng-model="gameData.overUnder"
+                placeholder="Score Total"/>
+         <input type="number"
+                class="form-control"
+                ng-model="gameData.overOdds"
+                placeholder="Over Odds"/>
+         <input type="number"
+                class="form-control"
+                ng-model="gameData.underOdds"
+                placeholder="Under Odds"/>
+      </div>
+      <button type="submit" class="btn btn-primary">Save Game</button>
+   </form>
+   <form ng-submit="deleteGame()" name="deleteGameForm">
+      <button type="submit" class="btn btn-primary">Delete Game</button>
+   </form>
+   <div ng-repeat="game in existingGames">
+      <div ng-click="loadGame(game)">
+         <div>{{game.awayTeam}}: {{game.awayScore}} {{-game.gameLine}}({{game.awayLineOdds}}) {{game.awayMoneyLine}} {{gameOverUnder}} u({{game.underOdds}})</div>
+         <div>{{game.homeTeam}}: {{game.homeScore}} {{game.gameLine}}({{game.homeLineOdds}}) {{game.homeMoneyLine}} {{gameOverUnder}} o({{game.overOdds}})</div>
+      </div>
+   </div>
 </script>
