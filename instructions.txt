@@ -1,0 +1,43 @@
+'git pull'   //Pulls latest copy from the github repository
+'setenv SECKEY bflpsecretbflp' //Sets secret key in tcsh ('echo $SHELL' to see what shell you're using)
+'export SECKEY=bflpsecretbflp' //Sets secret key in bash
+(In another terminal)
+'sudo /usr/local/bin/mongod' <Enter your password> //Starts mongo database listener on port 27017
+(Back to original terminal)
+'gulp dev' //Starts web server listening on localhost:3000
+Connect to localhost:3000 in a browser
+Make an account on Create Account page
+Login, all links on home page should have dummy pages they go to
+Click your name in the navbar, that page is complete
+
+To make yourself an admin user -
+(In new terminal)
+'/usr/local/bin/mongo'  //Connects to the mongo database with a command line shell
+(at mongodb command line)
+'use bflp'
+'show collections'  //Should list system.indexes and users
+'db.users.find()'  //Should show you a database document that is your user
+'db.users.update({ username: "<insertYourUserName>" }, { $set: { role: "siteAdmin" } })'
+
+Click 'logout' in the navbar, then re-login
+You should now see extra links on the home page you didn't have before
+User Management and Game Management pages are done
+
+All web pages are in <sportsPools>/views.  They're named <file>.ejs.
+There's an index.ejs that imports the smaller subviews in all the subdirectories
+There's a proj.styl file also that can be filled with custom css, it's written in 'stylus' format, which
+   gulp turns into official css files for the app, stylus is much more forgiving on format, as you'll
+   see by the one example that's in there
+If you're on chrome and you have livereload added to it, you should be able to click the very center
+   of the recycle icon with the little tiny circle inside it to enable livereload (it's a very fine
+   point-click right on that circle, you'll see the circle fill-in when it works)
+If it fails, make sure 'gulp dev' is running
+Once livereload is on, change 'green' in the proj.styl to 'blue' and save the file.  You should
+   immediately see the browser change the header font color to blue.
+   
+Add teams to the database:
+Open <sportsPools>/insertTeams.txt.  Copy and paste that whole file (yes it's kind of big) into the
+   mongodb command line terminal.  Press return.
+   Assuming it works, run 'db.teams.find()', you should see all the teams in all 4 major sports
+Open the manage games page in the browser, make sure the teams in the dropdowns update right as
+   the sport you select changes.
