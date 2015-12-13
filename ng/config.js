@@ -53,12 +53,6 @@ angular.module('app')
          controller: 'LeagueCreateCtrl'
       });
 
-      $stateProvider.state('registerLeague', {
-         url: '/registerLeague',
-         templateUrl: '/registerLeague.html',
-         controller: 'RegisterLeagueCtrl'
-      });
-
       $stateProvider.state('viewLeague', {
          url: '/viewLeague/:leagueName',
          templateUrl: '/viewLeague.html',

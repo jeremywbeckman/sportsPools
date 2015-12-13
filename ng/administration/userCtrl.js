@@ -33,7 +33,6 @@ angular.module('app')
                 });
          }
          else {
-            console.log('review bad');
             user.updateUsername($scope.firstUser.username, $scope.goodname)
                 .error(function(data) {
                    $scope.error = data;

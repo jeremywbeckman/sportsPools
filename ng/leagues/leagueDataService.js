@@ -5,6 +5,12 @@ angular.module('app')
    function($http) {
       var leagues = {};
 
+      leagues.leagueTypes = [
+         "Sports Betting",
+         "Pickem",
+         "Survivor"
+      ];
+      
       leagues.createLeague = function(leagueInfo) {
          return $http.post("/createLeague", leagueInfo);
       };

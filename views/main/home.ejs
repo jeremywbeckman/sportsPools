@@ -7,21 +7,21 @@
       <li ng-show="currentUser().role === 'siteAdmin'"><a href="/#/manageUsers">Manage Users</a></li>
       <li ng-show="currentUser().role === 'siteAdmin'"><a href="/#/manageLeagues">Manage Leagues</a></li>
       <li><a href="/#/createLeague">Create League</a></li>
-      <li><a href="/#/registerLeague">Register for League</a></li>
       <li><a href="/#/userStats">View My History</a></li>
    </ul>
-   <div class="row">
-      <div class="col-md-6" ng-show="isLoggedIn()">
-         <h3>My Leagues</h3>
-         <ul ng-repeat="league in leagues">
-            <li><a href="/#/viewLeague/{{ league.leagueName }}">{{ league.leagueName }}</a></li>
-         </ul>
-      </div>
-      <div class="col-md-6">
-         <h3>Public Leagues</h3>
-         <ul ng-repeat="league in publicLeagues">
-            <li><a href="/#/viewLeague/{{ league.leagueName }}">{{ league.leagueName }}</a></li>
-         </ul>
-      </div>
+   <div ng-show="isLoggedIn()">
+      <h3>My Leagues</h3>
+      <ul ng-repeat="league in leagues">
+         <li><a href="/#/viewLeague/{{ league.leagueName }}">{{ league.leagueName }}</a></li>
+      </ul>
+   </div>
+   <div>
+      League Search: <input type="text">
+   </div>
+   <div>
+      <h3>Public Leagues</h3>
+      <ul ng-repeat="league in publicLeagues">
+         <li><a href="/#/viewLeague/{{ league.leagueName }}">{{ league.leagueName }}</a></li>
+      </ul>
    </div>
 </script>

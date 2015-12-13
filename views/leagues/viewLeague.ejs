@@ -1,5 +1,19 @@
 <script type="text/ng-template" id="/viewLeague.html">
    <div class="page-header">
-      <h1>View League {{leagueName}}</h1>
+      <h1>View {{ leagueName }}</h1>
+   </div>
+   <div ng-show="notRegistered()">
+      <form ng-submit="registerForLeague()">
+         <input type="text"
+                ng-show="league.private"
+                placeholder="League Password"/>
+         <button type="submit" class="btn btn-primary"> Register </button>
+      </form>
+   </div>
+   <div>
+      <h3>Standings</h3>
+   </div>
+   <div>
+      <h3>Upcoming Games</h3>
    </div>
 </script>

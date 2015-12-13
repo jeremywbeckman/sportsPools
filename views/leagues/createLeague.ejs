@@ -5,51 +5,162 @@
    <div ng-show="error.message" class="alert alert-danger row">
       <span>{{ error.message }}</span>
    </div>
-   <form ng-submit="createLeague()">
+   <form name="createLeagueForm" ng-submit="createLeague()" novalidate>
       <div class="form-group">
 
-         League Name:
-         <input type="text"
-                ng-model="leagueForm.leagueName"/>
+         <div class="row">
+            <div class="col-md-2">League Name:</div>
+            <div class="col-md-10">
+               <input type="text"
+                      class="form-control"
+                      name="leagueName"
+                      ng-minlength="4"
+                      ng-maxlength="20"
+                      maxlength="30"
+                      required
+                      ng-change="validateLeagueName()"
+                      ng-model="leagueForm.leagueName"/>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-offset-2">
+         <p ng-show="leagueNameMessage" class="help-block">{{ leagueNameMessage }}</p>
+         <p ng-show="createLeagueForm.leagueName.$invalid &&
+                     !createLeagueForm.leagueName.$error.minlength &&
+                     !createLeagueForm.leagueName.$error.maxlength"
+            class="help-block">
+            Required
+         </p>
+         <p ng-show="createLeagueForm.leagueName.$error.minlength &&
+                     !createLeagueForm.leagueName.$pristine"
+            class="help-block">
+            League Name must be at least 4 characters
+         </p>
+         <p ng-show="createLeagueForm.leagueName.$error.maxlength"
+            class="help-block">
+            League Name can be no more than 20 characters
+         </p>
+            </div>
+         </div>
 
-         League Type:
-         <select name="typeSelect"
-                 id="typeSelect"
-                 ng-options="type for type in leagueTypes"
-                 ng-model="leagueForm.leagueType">
-         </select>
+         <div class="row">
+            <div class="col-md-2">League Type:</div>
+            <div class="col-md-10">
+               <select name="typeSelect"
+                       id="typeSelect"
+                       class="form-control"
+                       ng-options="type for type in leagueTypes"
+                       ng-model="leagueForm.leagueType">
+               </select>
+            </div>
+         </div>
 
-         Sports:
-         <select name="sportSelect"
-                 id="sportSelect"
-                 multiple
-                 ng-multiple
-                 ng-options="sport for sport in sports"
-                 ng-model="leagueForm.sports">
-         </select>
+         <div class="row">
+            <div class="col-md-2">Sports:</div>
+            <div class="col-md-10">
+               <select name="sportSelect"
+                       id="sportSelect"
+                       class="form-control"
+                       multiple
+                       ng-multiple
+                       ng-options="sport for sport in sports"
+                       ng-change="validateSports()"
+                       ng-model="leagueForm.sports">
+               </select>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-offset-2">
+         <p ng-show="sportsMessage" class="help-block">{{ sportsMessage }}</p>
+            </div>
+         </div>
 
-         Players:
-         <input type="number"
-                placeholder="Number of Players"
-                ng-model="leagueForm.numberOfPlayers"/>
+         <div class="row">
+            <div class="col-md-2">Players:</div>
+            <div class="col-md-10">
+               <input type="number"
+                      class="form-control"
+                      min="1"
+                      max="999999"
+                      ng-model="leagueForm.numberOfPlayers">
+               </input>
+            </div>
+         </div>
 
-         Start Date:
-         <input type="date"
-                ng-model="leagueForm.startDate"/>
+         <div class="row">
+            <div class="col-md-2">Season One Start:</div>
+            <div class="col-md-10">
+               <input type="date"
+                      class="form-control"
+                      ng-change="validateDates()"
+                      ng-model="leagueForm.startDate">
+               </input>
+            </div>
+         </div>
 
-         End Date:
-         <input type="date"
-                ng-model="leagueForm.endDate"/>
+         <div class="row">
+            <div class="col-md-2">Season One End:</div>
+            <div class="col-md-10">
+               <input type="date"
+                      class="form-control"
+                      ng-change="validateDates()"
+                      ng-model="leagueForm.endDate">
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-offset-2">
+         <p ng-show="datesMessage" class="help-block">{{ datesMessage }}</p>
+            </div>
+         </div>
 
-         Private?
-         <input type="checkbox"
-                ng-model="leagueForm.private"/>
+         <div class="row">
+            <div class="col-md-2">Private?</div>
+            <div class="col-md-10">
+               <input type="checkbox"
+                      name="leaguePrivateFlag"
+                      class="form-control"
+                      ng-change="validatePassword()"
+                      ng-model="leagueForm.private">
+               </input>
+            </div>
+         </div>
 
-         Password:
-         <input type="text"
-                ng-model="leagueForm.leaguePassword">
-         </input>
-         <button type="submit" class="btn btn-primary">Create League</button>
+         <div class="row">
+            <div class="col-md-2">Password:</div>
+            <div class="col-md-10">
+               <input type="text"
+                      class="form-control"
+                      name="leaguePassword"
+                      ng-minlength="4"
+                      ng-maxlength="20"
+                      maxlength="30"
+                      ng-change="validatePassword()"
+                      ng-model="leagueForm.leaguePassword">
+               </input>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-offset-2">
+         <p ng-show="leaguePwdMessage" class="help-block">{{ leaguePwdMessage }}</p>
+         <p ng-show="createLeagueForm.leaguePrivateFlag &&
+                     createLeagueForm.leaguePassword.$error.minlength &&
+                     !createLeagueForm.leaguePassword.$pristine"
+            class="help-block">
+            League Password must be at least 4 characters
+         </p>
+         <p ng-show="createLeagueForm.leaguePrivateFlag &&
+                     createLeagueForm.leaguePassword.$error.maxlength"
+            class="help-block">
+            League Password can be no more than 20 characters
+         </p>
+            </div>
+         </div>
+
+         <button type="submit"
+                 class="btn btn-primary"
+                 ng-disabled="createLeagueForm.$invalid || !validateForm()">
+            Create League
+         </button>
       </div>
    </form>
 </script>

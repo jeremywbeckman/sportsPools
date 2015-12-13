@@ -16,4 +16,12 @@ var LeagueSchema = new mongoose.Schema({
    password: String
 });
 
+LeagueSchema.statics.findByLeagueName = function(leagueName, cbFunc) {
+   this.findOne({ "leagueName" : leagueName }, function(err, league) {
+      if (err) { return cbFunc(err); }
+
+      return cbFunc(league);
+   });
+};
+
 mongoose.model('League', LeagueSchema);
