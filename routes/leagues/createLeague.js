@@ -51,6 +51,7 @@ module.exports = function(app) {
       league.startDate = req.body.startDate;
       league.endDate = req.body.endDate;
       league.private = req.body.private;
+      league.reviewed = false;
       league.commissioner = req.userInfo.username;
 
       league.save(function(err) {
