@@ -4,10 +4,47 @@ angular.module('app')
    '$scope',
    '$state',
    'auth',
-   function($scope, $state, auth) {
-      $scope.currentUser = auth.currentUser;
+   'leagueData',
+   'gameData',
+   function($scope, $state, auth, leagueData, gameData) {
       $scope.isLoggedIn = auth.isLoggedIn;
-      $scope.leagues = [ { "leagueName" : "League One" }, { "leagueName" : "League Two" } ];
-      $scope.publicLeagues = [ { "leagueName" : "Public League One" }, { "leagueName" : "Public League Two" } ];
+      $scope.currentUser = auth.currentUser;
+      $scope.leagueTypes = leagueData.leagueTypes;
+      $scope.sports = gameData.sports;
+      
+      var searchForm = {
+         leagueName: '',
+         leagueType: '',
+         sports: [],
+         private: ''
+      };
+      
+      $scope.getLeagues = function() {
+         leagueData.getLeagues(searchForm).then(
+            function(responseData) {
+               $scope.leagues = responseData.data;
+               $scope.error = '';
+            },
+            function(error) {
+               $scope.error = error.data;
+            }
+         );
+      };
+
+      $scope.getMyLeagues = function() {
+         leagueData.getMyLeagues().then(
+            function(responseData) {
+               $scope.myLeagues = responseData.data;
+               $scope.error = '';
+            },
+            function(error) {
+               $scope.error = error.data;
+            }
+         );
+      };
+
+      $scope.getLeagues();
+      $scope.getMyLeagues();
+      $scope.searchForm = searchForm;
    }
 ]);

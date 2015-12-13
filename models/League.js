@@ -49,4 +49,43 @@ LeagueSchema.statics.updateLeagueName = function(badname, goodname, cbFunc) {
    });
 };
 
+LeagueSchema.statics.getLeagues = function(name, type, sports, private, cbFunc) {
+   var query = {};
+   if (name) {
+      query.leagueName = { $regex: ".*" + name + ".*" };
+   }
+   if (type) {
+      query.leagueType = type;
+   }
+   if (sports) {
+      if (typeof sports === 'string')
+      {
+         sports = [ sports ];
+      }
+
+      query.sports = { $in: sports };
+   }
+   if (private) {
+      query.private = private;
+   }
+   
+   if (!query) {
+      return cbFunc(new Error('No parameters found for league request'));
+   }
+   
+   this.find(query, function(err, leagues) {
+      if (err) { return cbFunc(err); }
+      
+      return cbFunc(leagues);
+   });
+};
+
+LeagueSchema.statics.getUsersLeagues = function(username, cbFunc) {
+   this.find({ players: { $in: [ username ] } }, function(err, leagues) {
+      if (err) { return cbFunc(err); }
+
+      return cbFunc(leagues);
+   });
+};
+
 mongoose.model('League', LeagueSchema);

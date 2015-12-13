@@ -2,6 +2,9 @@
    <div class="page-header">
       <h1>Fantasy Sports Leagues</h1>
    </div>
+   <div ng-show="error.message" class="alert alert-danger row">
+      <span>{{ error.message }}</span>
+   </div>
    <ul ng-show="isLoggedIn()" class="list-inline">
       <li ng-show="currentUser().role === 'siteAdmin'"><a href="/#/manageGames">Update Games</a></li>
       <li ng-show="currentUser().role === 'siteAdmin'"><a href="/#/manageUsers">Manage Users</a></li>
@@ -9,18 +12,63 @@
       <li><a href="/#/createLeague">Create League</a></li>
       <li><a href="/#/userStats">View My History</a></li>
    </ul>
-   <div ng-show="isLoggedIn()">
+   <div ng-show="isLoggedIn() && myLeagues">
       <h3>My Leagues</h3>
-      <ul ng-repeat="league in leagues">
+      <ul ng-repeat="league in myLeagues">
          <li><a href="/#/viewLeague/{{ league.leagueName }}">{{ league.leagueName }}</a></li>
       </ul>
    </div>
    <div>
-      League Search: <input type="text">
+      <h3>Search for Leagues</h3>
+      <form name="leagueSearchForm" ng-submit="getLeagues()">
+         <div class="form-group">
+            <div class="row">
+               <div class="col-md-2">League Name:</div>
+               <div class="col-md-10">
+                  <input type="text"
+                         class="form-control"
+                         ng-model="searchForm.leagueName">
+                  </input>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-2">League Type:</div>
+               <div class="col-md-10">
+                  <select class="form-control"
+                          ng-options="type for type in leagueTypes"
+                          ng-model="searchForm.leagueType">
+                     <option value="">Any</option>
+                  </select>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-2">Sports</div>
+               <div class="col-md-10">
+                  <select class="form-control"
+                          ng-options="sport for sport in sports"
+                          multiple
+                          ng-multiple
+                          ng-model="searchForm.sports">
+                  </select>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-2">Private</div>
+               <div class="col-md-10">
+                  <select class="form-control"
+                          ng-model="searchForm.private">
+                     <option value="true">Private</option>
+                     <option value="false">Public</option>
+                     <option value="">Any</option>
+                  </select>
+               </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+         </div>
+      </form>
    </div>
    <div>
-      <h3>Public Leagues</h3>
-      <ul ng-repeat="league in publicLeagues">
+      <ul ng-repeat="league in leagues">
          <li><a href="/#/viewLeague/{{ league.leagueName }}">{{ league.leagueName }}</a></li>
       </ul>
    </div>
