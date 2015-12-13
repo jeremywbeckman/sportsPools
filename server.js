@@ -15,6 +15,7 @@ var passport = require('passport');
 require('./models/Users');
 require('./models/Game');
 require('./models/Teams');
+require('./models/League');
 require('./config/passport');
 
 var app = express();
