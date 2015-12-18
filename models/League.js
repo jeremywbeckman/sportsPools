@@ -14,7 +14,8 @@ var LeagueSchema = new mongoose.Schema({
    startDate: Date,
    endDate: Date,
    reviewed: Boolean,
-   password: String
+   password: String,
+   preferences: mongoose.Schema.Types.Mixed
 });
 
 LeagueSchema.statics.findByLeagueName = function(leagueName, cbFunc) {
@@ -85,6 +86,14 @@ LeagueSchema.statics.getUsersLeagues = function(username, cbFunc) {
       if (err) { return cbFunc(err); }
 
       return cbFunc(leagues);
+   });
+};
+
+LeagueSchema.statics.addUser = function(leagueData, cbFunc) {
+   this.findOneAndUpdate({ leagueName: leagueData.leagueName }, leagueData, function(err, data) {
+      if (err) { return cbFunc(err); }
+      
+      return cbFunc(data);
    });
 };
 

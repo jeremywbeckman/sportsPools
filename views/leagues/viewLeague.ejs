@@ -1,17 +1,57 @@
 <script type="text/ng-template" id="/viewLeague.html">
    <div class="page-header">
-      <h1>View {{ leagueName }}</h1>
+      <h1>{{ league.leagueName }}</h1>
    </div>
-   <div ng-show="notRegistered()">
+   <div ng-show="error.message" class="alert alert-danger row">
+      <span>{{ error.message }}</span>
+   </div>
+   <div ng-show="info.message" class="alert alert-info row">
+      <span>{{ info.message }}</span>
+   </div>
+   <div ng-hide="isRegistered() || leagueFull() || leagueStarted()">
       <form ng-submit="registerForLeague()">
          <input type="text"
                 ng-show="league.private"
+                ng-model="registerForm.leaguePassword",
+                max="30",
+                ng-max="30",
                 placeholder="League Password"/>
          <button type="submit" class="btn btn-primary"> Register </button>
       </form>
    </div>
+   <div ng-show="leagueFull()">
+      League is fully registered
+   </div>
+   <div ng-show="leagueStarted() && !leagueEnded()">
+      League has started
+   </div>
+   <div ng-show="leagueEnded()">
+      League is complete
+   </div>
+   <div>
+      <h3>League Rules</h3>
+      <p>League Type: {{league.leagueType}}</p>
+      <div ng-show="league.leagueType === 'Sports Betting'">
+         
+      </div>
+      <div ng-show="league.leagueType === 'Pickem'">
+      pickem
+      </div>
+      <div ng-show="league.leagueType === 'Survivor'">
+      survivor
+      </div>
+   </div>
+   <div>
+      <h3>Idle Preferences</h3>
+   </div>
+   <div>
+      <h3>Seasons</h3>
+   </div>
    <div>
       <h3>Standings</h3>
+   </div>
+   <div>
+      <h3>Latest Results</h3>
    </div>
    <div>
       <h3>Upcoming Games</h3>

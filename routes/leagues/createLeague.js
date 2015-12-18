@@ -41,9 +41,48 @@ module.exports = function(app) {
          }
       });
 
+      var sportsBettingDefaults = {
+         allowedBets: ["ATS", "OU", "ML"],
+         prizeDonation: 10000,
+         startingBankroll: 10000,
+         minBetsPerWeek: 5,
+         minAmountPerBet: 1,
+         maxAmountPerBet: 2500,
+         mustBetMinimum: 5000,
+         mustBetEveryGame: false,
+         prizeStructure: [
+                         { place: 1, percentage: 50 },
+                         { place: 2, percentage: 30 },
+                         { place: 3, percentage: 20 }
+                         ]
+      };
+      
+      var pickemDefaults = {
+         prizeDonation: 10000,
+         gameWeights: "linear",   //Other options: equal, exponential
+         weekPercentageForBonus: 0,
+         weeklyAvailableBonus: 0,
+         prizeStructure: [
+                         { place: 1, percentage: 50 },
+                         { place: 2, percentage: 30 },
+                         { place: 3, percentage: 20 }
+                         ]
+      };
+      
+      var survivorDefaults = {
+         prizeDonation: 10000,
+         teamOnceOnly: true,
+         tieBreaker: "split",   //Other option: continue
+         prizeStructure: [
+                         { place: 1, percentage: 50 },
+                         { place: 2, percentage: 30 },
+                         { place: 3, percentage: 20 }
+                         ]
+      };
+      
       var league = new League();
       league.leagueName = req.body.leagueName;
-      league.leaguePassword = req.body.leaguePassword;
+      league.password = req.body.leaguePassword;
       league.leagueType = req.body.leagueType;
       league.numberOfPlayers = req.body.numberOfPlayers;
       league.sports = req.body.sports;
@@ -53,6 +92,16 @@ module.exports = function(app) {
       league.private = req.body.private;
       league.reviewed = false;
       league.commissioner = req.userInfo.username;
+      
+      if (req.body.leagueType === "Sports Betting") {
+         league.preferences = sportsBettingDefaults;
+      }
+      else if (req.body.leagueType === "Pickem") {
+         league.preferences = pickemDefaults;
+      }
+      else if (req.body.leagueType === "Survivor") {
+         league.preferences = survivorDefaults;
+      }
 
       league.save(function(err) {
          if (err) { next(err); }

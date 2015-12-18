@@ -8,7 +8,7 @@ angular.module('app')
       leagues.leagueTypes = [
          "Sports Betting",
          "Pickem",
-         "Survivor"
+         "Survivor",
       ];
 
       leagues.createLeague = function(leagueInfo) {
@@ -16,7 +16,6 @@ angular.module('app')
       };
 
       leagues.getLeagues = function(leagueSearch) {
-         console.log(leagueSearch);
          var params = { params: {
             sports: leagueSearch.sports
          }
@@ -30,12 +29,20 @@ angular.module('app')
          if (leagueSearch.private) {
             params.params.private = leagueSearch.private;
          }
-         console.log(params);
+
          return $http.get("/getLeagues", params);
       };
 
       leagues.getMyLeagues = function() {
          return $http.get("/getUsersLeagues");
+      };
+
+      leagues.getLeagueByName = function(leagueName) {
+         return $http.get("/getLeagues", { params: { leagueName: leagueName } });
+      };
+
+      leagues.registerForLeague = function(registerData) {
+         return $http.post("/registerForLeague", registerData);
       };
 
       return leagues;
