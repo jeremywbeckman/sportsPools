@@ -56,7 +56,7 @@ UserSchema.methods.persistPassword = function() {
                                        { "hash" : this.hash, "salt" : this.salt },
                                        function(err, user) {
       if (err) { console.log('database error occurred, password not updated'); }
-      
+
       console.log(user.username + ' password has been updated');
    });
 };
@@ -94,7 +94,7 @@ UserSchema.statics.findReviewableUsers = function(cbFunc) {
 UserSchema.statics.reviewComplete = function(username, cbFunc) {
    this.findOneAndUpdate({ "username" : username }, { "reviewed" : true }, function(err, user) {
       if (err) { return cbFunc(err); }
-      
+
       return cbFunc(user);
    });
 };
@@ -102,7 +102,7 @@ UserSchema.statics.reviewComplete = function(username, cbFunc) {
 UserSchema.statics.updateUsername = function(badname, goodname, cbFunc) {
    this.findOneAndUpdate({ "username" : badname }, { "username" : goodname, "reviewed" : true }, function(err, user) {
       if (err) { return cbFunc(err); }
-      
+
       return cbFunc(user);
    });
 };

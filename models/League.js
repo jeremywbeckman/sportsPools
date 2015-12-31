@@ -8,14 +8,11 @@ var LeagueSchema = new mongoose.Schema({
    leagueName: String,
    leagueType: String,
    private: Boolean,
-   numberOfPlayers: Number,
-   players: Array,
    sports: Array,
+   numberOfPlayers: Number,
    startDate: Date,
-   endDate: Date,
    reviewed: Boolean,
    password: String,
-   preferences: mongoose.Schema.Types.Mixed
 });
 
 LeagueSchema.statics.findByLeagueName = function(leagueName, cbFunc) {
@@ -37,7 +34,7 @@ LeagueSchema.statics.findReviewableLeagues = function(cbFunc) {
 LeagueSchema.statics.reviewComplete = function(leagueName, cbFunc) {
    this.findOneAndUpdate({ "leagueName" : leagueName }, { "reviewed" : true }, function(err, league) {
       if (err) { return cbFunc(err); }
-      
+
       return cbFunc(league);
    });
 };
@@ -45,7 +42,7 @@ LeagueSchema.statics.reviewComplete = function(leagueName, cbFunc) {
 LeagueSchema.statics.updateLeagueName = function(badname, goodname, cbFunc) {
    this.findOneAndUpdate({ "leagueName" : badname }, { "leagueName" : goodname, "reviewed" : true }, function(err, league) {
       if (err) { return cbFunc(err); }
-      
+
       return cbFunc(league);
    });
 };
@@ -69,14 +66,14 @@ LeagueSchema.statics.getLeagues = function(name, type, sports, private, cbFunc) 
    if (private) {
       query.private = private;
    }
-   
+
    if (!query) {
       return cbFunc(new Error('No parameters found for league request'));
    }
-   
+
    this.find(query, function(err, leagues) {
       if (err) { return cbFunc(err); }
-      
+
       return cbFunc(leagues);
    });
 };
@@ -92,7 +89,7 @@ LeagueSchema.statics.getUsersLeagues = function(username, cbFunc) {
 LeagueSchema.statics.addUser = function(leagueData, cbFunc) {
    this.findOneAndUpdate({ leagueName: leagueData.leagueName }, leagueData, function(err, data) {
       if (err) { return cbFunc(err); }
-      
+
       return cbFunc(data);
    });
 };
