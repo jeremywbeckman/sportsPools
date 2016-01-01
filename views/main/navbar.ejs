@@ -3,7 +3,7 @@
       <li ng-show="isLoggedIn()"><a href="/#/accountDetails">{{ currentUser().firstname }} {{ currentUser().lastname }}</a></li>
       <li ng-show="isLoggedIn()"><a href="/#/home">Home</a></li>
       <li ng-hide="isLoggedIn()"><a href="/#/login">Login</a></li>
-      <li ng-show="isLoggedIn()" ng-click="logout()"><a>Logout</a></li>
+      <li ng-show="isLoggedIn()" ng-click="logout()"><a href="/#/home">Logout</a></li>
       <li ng-hide="isLoggedIn()"><a href="/#/register">Create Account</a></li>
    </ul>
 </nav>
